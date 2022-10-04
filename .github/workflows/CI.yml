@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - "Versions/*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    env:
+      BUILD_CONFIG: 'Release'
+      PROJECT_FILE: 'Tevux.Software.Helpers/Tevux.Software.Helpers.csproj'
+      OUTPUT_FOLDER: 'Tevux.Software.Helpers/bin/Release'
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+          
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration ${{env.BUILD_CONFIG}} ${{env.PROJECT_FILE}} --no-restore
+
+      - name: Pack
+        run: dotnet pack --configuration ${{env.BUILD_CONFIG}} --no-build 
+
+      - name: Publish to Nuget.org
+        run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+      
+      - name: Publish to Tevux Packages
+        run: nuget push **\*.nupkg -Source 'https://nuget.pkg.github.com/tevux-tech/index.json' -ApiKey ${{secrets.GITHUB_TOKEN}}

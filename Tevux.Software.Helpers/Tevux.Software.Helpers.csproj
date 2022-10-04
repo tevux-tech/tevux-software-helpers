@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <Version>0.18.0</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>Tevux.Software.Helpers</PackageId>
+    <Title>Tevux.Software.Helpers</Title>
+    <Authors>Tevux Technologies</Authors>
+    <Company>Tevux Technologies</Company>
+    <Description>Contains a few useful helpers methods, like string extensions.</Description>
+    <Copyright>© 2022 Tevux Technologies</Copyright>
+    <PackageTags>csharp;extensions;string</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <IncludeSymbols>False</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <RepositoryUrl>https://github.com/tevux-tech/tevux-software-helpers</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tevux.Tools.RepositorySettings" Version="1.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
